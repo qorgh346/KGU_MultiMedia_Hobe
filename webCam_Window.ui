@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1111</width>
-    <height>787</height>
+    <width>844</width>
+    <height>592</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>40</y>
+     <y>30</y>
      <width>131</width>
      <height>23</height>
     </rect>
@@ -69,32 +69,32 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>70</y>
+     <y>90</y>
      <width>131</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Stop WebCam</string>
+    <string>Stop</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="convertBtn">
+  <widget class="QPushButton" name="openVideoBtn">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>40</y>
+     <x>20</x>
+     <y>60</y>
      <width>131</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Show Convert</string>
+    <string>Open Video</string>
    </property>
   </widget>
   <widget class="QPushButton" name="grayscaleBtn">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>390</x>
      <y>40</y>
      <width>131</width>
      <height>23</height>
@@ -107,7 +107,7 @@
   <widget class="QPushButton" name="flipBtn">
    <property name="geometry">
     <rect>
-     <x>690</x>
+     <x>530</x>
      <y>40</y>
      <width>131</width>
      <height>23</height>
@@ -120,8 +120,8 @@
   <widget class="QLabel" name="outputCam">
    <property name="geometry">
     <rect>
-     <x>700</x>
-     <y>130</y>
+     <x>470</x>
+     <y>120</y>
      <width>341</width>
      <height>341</height>
     </rect>
