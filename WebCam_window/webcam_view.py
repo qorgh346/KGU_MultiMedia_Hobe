@@ -45,9 +45,9 @@ class webCamWindow(QDialog,QWidget,form_image_window):
             ret, self.source_image = cap.read()
             init_image = cv2.cvtColor(self.source_image, cv2.COLOR_BGR2RGB)
             self.show_image('input', init_image)
-
             if self.grayscale:
-                image = cv2.cvtColor(init_image, cv2.COLOR_BGR2GRAY)
+                # image = init_image
+                image = cv2.cvtColor(self.source_image, cv2.COLOR_BGR2GRAY)
             elif self.currentRotation == 90:
                 image = cv2.rotate(init_image, cv2.ROTATE_90_CLOCKWISE)
             elif self.currentRotation == 180:
@@ -108,20 +108,35 @@ class webCamWindow(QDialog,QWidget,form_image_window):
 
     # video 보여주는 부분
     def show_image(self,label,image):
+        # print(image.shape)
+        # image = np.expand_dims(image,axis=2)
+        # print(image.shape)
+        #
+        # print(image.strides[0])
         qt_image1 = QtGui.QImage(image.data,
                                  self.width,
                                  self.height,
                                  image.strides[0],
                                  QtGui.QImage.Format_RGB888)
-
+                                 #QtGui.QImage.Format.Format_BGR30)
+                                 #QtGui.QImage.Format_RGB888)
+        # print('label : ',label, qt_image1)
         if label == 'input':
-            print('input')
-            pixmap = QtGui.QPixmap.fromImage(qt_image1)
-            self.inputCam.setPixmap(pixmap)
+            # print('input')
+            pixmap = QtGui.QPixmap(qt_image1)
+            p = pixmap.scaled(300,300,Qt.IgnoreAspectRatio)
+
+            # pixmap = QtGui.QPixmap.fromImage(qt_image1)
+
+            self.inputCam.setPixmap(p)
         else:
-            print('output!!')
-            pixmap = QtGui.QPixmap.fromImage(qt_image1)
-            self.outputCam.setPixmap(pixmap)
+            # print('output!!')
+            # pixmap = QtGui.QPixmap.fromImage(qt_image1)
+            pixmap = QtGui.QPixmap(qt_image1)
+            p = pixmap.scaled(300, 300, Qt.IgnoreAspectRatio)
+
+            # pixmap = QtGui.QPixmap.fromImage(qt_image1)
+            self.outputCam.setPixmap(p)
 
     # video stop 하는 부분
     def stop_webcam(self):

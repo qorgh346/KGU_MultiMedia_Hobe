@@ -82,6 +82,19 @@ Filter the image with blurring, smoothing, sharpening.
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="grayScaleShowBtn">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>130</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Show Gray Scale</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

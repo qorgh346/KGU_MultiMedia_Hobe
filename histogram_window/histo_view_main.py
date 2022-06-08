@@ -19,14 +19,12 @@ class histoWindow(QDialog,QWidget,form_image_window):
         self.show()
 
     def initUI(self):
-        print('iniasdsadsadtUI')
-
         self.setupUi(self)
         self.home.clicked.connect(self.Home)
         self.histogramShowBtn.clicked.connect(self.histoShow)
         self.imgshowBtn.clicked.connect(self.imgShow)
+        self.grayScaleShowBtn.clicked.connect(self.grayShow)
     def histoShow(self):
-        print('zzsdfsdffsdfsdfsdf')
         histogram = self.getHistogram()
         histo = np.array(histogram)
         histo = qimage2ndarray.array2qimage(histo)
@@ -42,12 +40,18 @@ class histoWindow(QDialog,QWidget,form_image_window):
         plt.hist(self.image.ravel(),bins=256)
         plt.savefig('hist.png')
         hist_img = io.imread('hist.png')
-        print('io = > ',hist_img)
         img = Image.open('hist.png')
-
         img_resize = img.resize((256, 256))
-
         return img_resize
 
     def Home(self):
         self.close()
+    def grayShow(self):
+        import cv2
+        img = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+        img = qimage2ndarray.array2qimage(img)
+        qt_img = QtGui.QPixmap.fromImage(img)
+        self.view_result.setPixmap(qt_img)
+
+
+
