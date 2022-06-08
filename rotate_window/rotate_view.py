@@ -29,10 +29,10 @@ class rotateWindow(QDialog, QWidget, form_image_window):
         self.flipLRBtn.clicked.connect(self.img_flip_LR)
         self.flipTBBtn.clicked.connect(self.img_flip_TB)
         self.warpColBtn.clicked.connect(self.img_warp_Col)
-        self.cropBtn.clicked.connect(self.img_crop)
-        '''self.warpColBtn.clicked.connect(self.img_warp_Col)
         self.warpRowBtn.clicked.connect(self.img_warp_Row)
-        self.cropBtn.clicked.connect(self.img_crop)'''
+        self.cropBtn.clicked.connect(self.img_crop)
+
+
 
         self.currentRotation = 0
 
@@ -98,26 +98,32 @@ class rotateWindow(QDialog, QWidget, form_image_window):
         for i in range(rows):
             for j in range(cols):
                 offset_x = int(20.0 * math.sin(2 * 3.14 * i / 150))
-                offset_y = int(20.0 * math.cos(2 * 3.14 * j / 150))
-                if i + offset_y < rows and j + offset_x < cols:
-                    img_output[i, j] = self.image[(i + offset_y) % rows, (j + offset_x) % cols]
+                if j + offset_x < rows:
+                    img_output[i, j] = self.image[i, (j + offset_x) % cols]
                 else:
                     img_output[i, j] = 0
         img = qimage2ndarray.array2qimage(img_output)
         qt_img = QtGui.QPixmap.fromImage(img)
         self.view_result.setPixmap(qt_img)
-        # cv2.imshow('Multidirectional wave', img_output)
 
-    '''def img_warp_Col(self):
-        img = qimage2ndarray.array2qimage(self.image)
-        rows, cols = img.shape[0], img.shape[1]
-        img_output = np.zeros((rows, cols))
+    def img_warp_Row(self):
+        print(self.image.shape)
+        print(type(self.image))
+        rows = self.image.shape[0]
+        cols = self.image.shape[1]
+
+        img_output = np.zeros(self.image.shape, dtype=self.image.dtype)
 
         for i in range(rows):
             for j in range(cols):
-                offset_x = int(40.0 * math.sin(2*3.14*i / 180))
-                if j + offset_x < rows:
-                    img_output[i, j] = img[i, (j + offset_x) % cols]'''
+                offset_y = int(20.0 * math.cos(2 * 3.14 * j / 150))
+                if i + offset_y < rows :
+                    img_output[i, j] = self.image[(i + offset_y) % rows, j]
+                else:
+                    img_output[i, j] = 0
+        img = qimage2ndarray.array2qimage(img_output)
+        qt_img = QtGui.QPixmap.fromImage(img)
+        self.view_result.setPixmap(qt_img)
 
     # def image_input(self):
     #     print('image')
